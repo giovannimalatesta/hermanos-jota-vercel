@@ -1,0 +1,29 @@
+{
+  "name": "hermanos-jota",
+  "version": "1.0.0",
+  "description": "Santiago Calvi Alfie Giovanni Malatesta Pavón Muro Ulises Nahuel Mateo Martingorena David Fernandez Nadia Aiello",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ulises2156/Hermanos-Jota.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Ulises2156/Hermanos-Jota/issues"
+  },
+  "homepage": "https://github.com/Ulises2156/Hermanos-Jota#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "react-router-dom": "^7.9.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

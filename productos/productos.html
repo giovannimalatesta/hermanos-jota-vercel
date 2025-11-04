@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Productos</title>
+  <link rel="shortcut icon" href="../img/logo.svg" type="image/svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="./productos.css">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header>
+    <!-- Menú hamburguesa -->
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <!-- Logo -->
+    <a href="../index.html" class="logo-container">
+      <img class="logo-completo" src="../img/logo completo.png" alt="Logo Hermanos Jota">
+    </a>
+
+    <!-- Navegación + Carrito -->
+    <div class="nav-cart">
+      <nav>
+        <ul>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="../contacto/contactos.html">Contacto</a></li>
+        </ul>
+      </nav>   
+      <div class="cart-icon-container">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-counter" class="cart-counter">0</span>
+      </div>   
+    </div>
+  </header>
+
+  <section class="search-section">
+    <input type="text" id="search" placeholder="Buscar productos...">
+  </section>
+
+  
+  <main>
+    <h1 id = "tituloCatalogo">Catálogo de Productos</h1>
+    <div class="catalogo" id="catalogo">
+      <!--cargamos productos con js-->
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 Mueblería Hermanos Jota - Todos los derechos reservados</p>
+  </footer>
+
+  <script src="./productos.js"></script>
+</body>
+</html>
