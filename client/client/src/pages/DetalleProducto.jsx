@@ -5,6 +5,7 @@ import ProductDetail from '../components/ProductDetail';
 import { ProductListSkeleton } from '../components/SkeletonLoader';
 import EmptyState from '../components/EmptyState';
 import {useCart} from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 
 
 export default function DetalleProducto() {
@@ -14,6 +15,7 @@ export default function DetalleProducto() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const {addToCart} = useCart();
+  const { user } = useAuth();
   useEffect(() => {
     (async () => {
       try {
@@ -44,17 +46,6 @@ export default function DetalleProducto() {
         actionLink="/catalogo"
       />
   );
-/*
-  return (
-    <div>
-      <h1>{producto.nombre}</h1>
-      <img src={producto.imagenUrl} alt={producto.nombre} />
-      <p>{producto.descripcion}</p>
-      <p>Precio: ${producto.precio}</p>
-      <p>Stock: {producto.stock}</p>
-      <button onClick={handleDelete}>Eliminar</button>
-    </div>
-  );*/
 
  return (
     <main className="main">
@@ -65,6 +56,8 @@ export default function DetalleProducto() {
         onBack={() => navigate('/catalogo')}
       />
       </div>
+      
+      {user?.rol === "admin" && (
       <div style={{
         display: 'flex',
         justifyContent: 'center',
@@ -73,7 +66,7 @@ export default function DetalleProducto() {
       }}>
         <button onClick={handleDelete} className="submit-button">Eliminar producto</button>
       </div>      
-
+      )}
     </main>
   );
 

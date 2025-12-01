@@ -1,11 +1,60 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useAuth} from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Carrito() {
   const { cartItems, cartCount, addToCart, removeFromCart, clearCart } = useCart();
 
   const total = cartItems.reduce((sum, item) => sum + (item.precio * item.quantity), 0);
+
+  const { token, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+ 
+
+
+  const finalizarCompra = async () => {
+      if (!isAuthenticated) {
+        alert("Para finalizar la compra, debes iniciar sesion con tu cuenta");
+        navigate("/login");
+        return;
+      }
+
+      try{
+        const pedido = {
+          items: cartItems.map(item => ({
+            producto: item._id || item.id,
+            cantidad: item.quantity,
+            precio: item.precio
+          })),
+          total,
+        };
+
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/pedidos`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify(pedido)
+        });
+          
+      const data = await res.json();
+
+
+      if (!res.ok) {
+        throw new Error(data.mensaje || 'Error al procesar el pedido');
+      }
+
+      alert('Compra realizada con éxito');
+      clearCart();
+      navigate('/mis-pedidos');
+    } catch (error) {
+      alert(`Error al finalizar la compra: ${error.message}`);
+    }
+  };
+
 
   if (cartCount === 0) {
     return (
@@ -93,18 +142,12 @@ export default function Carrito() {
             </div>
 
             <div className="cart-actions">
-              <button
-                onClick={clearCart}
-                className="btn-clear-cart"
-              >
+              <button onClick={clearCart} className="btn-clear-cart">
                 Vaciar Carrito
               </button>
-              <Link
-                to="/contacto"
-                className="btn-checkout"
-              >
-                Consultar Compra
-              </Link>
+              <button onClick={finalizarCompra} className="btn-checkout">
+                Finalizar Compra
+              </button>
             </div>
           </div>
         </div>

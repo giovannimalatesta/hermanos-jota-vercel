@@ -25,14 +25,19 @@ export async function fetchProductById(id) {
 }
 
 export async function createProduct(product) {
+  const token = localStorage.getItem("token");
+
   try {
     const res = await fetch(`${API_URL}/productos`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
       body: JSON.stringify(product),
     });
 
-    // Leer el texto de error del backend para depuración
+
     if (!res.ok) {
       const errorText = await res.text();
       console.error('Error createProduct backend:', errorText);
@@ -46,9 +51,19 @@ export async function createProduct(product) {
   }
 }
 
+
 export async function deleteProduct(id) {
+   const token = localStorage.getItem("token");
   try {
-    const res = await fetch(`${API_URL}/productos/${id}`, { method: 'DELETE' });
+     const res = await fetch(`${API_URL}/productos/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`, 
+      },
+    });
+   
+   
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {

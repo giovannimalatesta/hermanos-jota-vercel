@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createProduct } from '../api/products';
+import { useAuth } from '../context/AuthContext';
+
+
+
 
 export default function CrearProducto() {
   const [form, setForm] = useState({
@@ -11,6 +15,14 @@ export default function CrearProducto() {
     imagenUrl: ''
   });
   const navigate = useNavigate();
+  const { user } = useAuth();
+
+    useEffect(() => {
+    if (!user || user.rol !== "admin") {
+      alert("Acceso denegado. Solo administradores pueden crear productos.");
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

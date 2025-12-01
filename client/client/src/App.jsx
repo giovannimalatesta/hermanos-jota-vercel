@@ -8,10 +8,16 @@ import Contacto from './pages/Contacto';
 import Carrito from './pages/Carrito';
 import CrearProducto from './pages/CrearProducto';
 import DetalleProducto from './pages/DetalleProducto';
-
+import Login from './pages/Login';
+import Registro from './pages/Registro';
+import ProtectedRoute from './components/ProtectedRoute';
+import Perfil from './pages/Perfil';
+import MisPedidos from './pages/MisPedidos';
+import { AuthProvider } from './context/AuthContext';
 
 export default function App() {
   return (
+    <AuthProvider>
     <CartProvider>
 
           <Routes>
@@ -22,9 +28,30 @@ export default function App() {
               <Route path="carrito" element={<Carrito />} />
               <Route path="admin/crear-producto" element={<CrearProducto/>}/>
               <Route path="catalogo/:id" element={<DetalleProducto/>}/>
-            </Route>
+
+              <Route path="login" element={<Login />} />
+            <Route path="registro" element={<Registro />} />
+
+             <Route
+              path="perfil"
+              element={
+                <ProtectedRoute>
+                  <Perfil />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="mis-pedidos"
+              element={
+                <ProtectedRoute>
+                  <MisPedidos />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
           </Routes>
 
     </CartProvider>
+    </AuthProvider>
   );
 }
