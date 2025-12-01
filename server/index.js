@@ -19,9 +19,16 @@ const PORT = process.env.PORT || 5000;
 
 //Cors
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://ulises2156.github.io'], //
+  origin: [
+    'http://localhost:5173',
+    'https://hermanos-jota-vercel.vercel.app',
+    'https://hermanos-jota-vercel-k4dx5ehmh-giovannimalatestas-projects.vercel.app' // dominio real de Vercel
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
+
 
 app.use(express.json());
 
