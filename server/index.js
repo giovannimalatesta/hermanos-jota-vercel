@@ -22,7 +22,8 @@ app.use(cors({
   origin: [
     'http://localhost:5173',
     'https://hermanos-jota-vercel.vercel.app',
-    'https://hermanos-jota-vercel-k4dx5ehmh-giovannimalatestas-projects.vercel.app' // dominio real de Vercel
+    'https://hermanos-jota-vercel-k4dx5ehmh-giovannimalatestas-projects.vercel.app', 
+    'https://hermanos-jota-vercel-a8xpozvem-giovannimalatestas-projects.vercel.app'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
